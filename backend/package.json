@@ -1,0 +1,16 @@
+{
+  "name": "student-record-system",
+  "version": "1.0.0",
+  "description": "Thie is the student record system where it manages student with name, roll, course and grade",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --env-file=.env --watch app.js"
+  },
+  "author": "Sonam Sherpa",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "pg": "^8.15.6",
+    "sequelize": "^6.37.7"
+  }
+}
