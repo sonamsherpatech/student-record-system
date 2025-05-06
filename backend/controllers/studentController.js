@@ -1,3 +1,4 @@
+const { where } = require("sequelize")
 const { students } = require("../database/connection")
 
 exports.fetchStudents = async (req, res) => {
@@ -25,13 +26,42 @@ exports.postStudent = async (req, res) => {
   })
 }
 
-exports.updateStudent = (req, res) => {
-  res.json({
-    message: "Student data sucessfully updated"
-  })
+exports.updateStudent = async (req, res) => {
+  try {
+    const id = req.params.id
+    const { rollNo, studentName, age, faculty, blockNum } = req.body
+
+    await students.update({
+      rollNo,
+      studentName,
+      age,
+      faculty,
+      blockNum
+    }, {
+      where: {
+        id
+      }
+    })
+
+
+    res.json({
+      message: "Student data sucessfully updated"
+    })
+  } catch (error) {
+    res.json({
+      message: "Error in updating"
+    })
+
+  }
 }
 
-exports.deleteStudent = (req, res) => {
+exports.deleteStudent = async (req, res) => {
+  const id = req.params.id
+  await students.destroy({
+    where: {
+      id
+    }
+  })
   res.json({
     message: "Student data sucessfully delted from database"
   })
